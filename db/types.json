@@ -1,0 +1,40 @@
+{
+    "types": [
+        {
+            "id": 0,
+            "category": 0,
+            "name": "personal",
+            "description": "Fireworks intended for recreational use during holiday celebrations"
+        },
+        {
+            "id": 1,
+            "category": 0,
+            "name": "event",
+            "description": "Fireworks intended for special events"
+        },
+        {
+            "id": 2,
+            "category": 0,
+            "name": "emergency",
+            "description": "Fireworks intended emergency situations"
+        },
+        {
+            "id": 3,
+            "category": 1,
+            "name": "ground",
+            "description": "Fireworks intended for ground use"
+        },
+        {
+            "id": 4,
+            "category": 1,
+            "name": "surface-to-air",
+            "description": "Fireworks intended for surface to air action"
+        },
+        {
+            "id": 5,
+            "category": 1,
+            "name": "subsurface",
+            "description": "Fireworks intended blowing things up"
+        }
+    ]
+}
