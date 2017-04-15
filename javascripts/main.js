@@ -1,40 +1,60 @@
 $(document).ready(function(){
 
-    var firework = [];
+    var category = [];
+    var types = [];
+    var products = [];
+    var categoryId;
+    var categoryName;
 
+    // function makeDropDown() {
+    //     var dropDownString;
+    //     var currentCategory;
+    //     for (j = 0; j < category.length; j++) {
+    //         currentCategory = category[j];
+    //         dropDownString += `<li>`;
+    //         dropDownString += `<a href="#" id="${currentCategory.id}">${currentCategory.name}</a>`;
+    //         dropDownString += `</li>`;
+    //     }
+    //     $("#dropdown").append(dropDownString);
+    // }
+
+
+    $("#firework").on("click", categorySelect);
+    $("#demolition").on("click", categorySelect);
+    // $(".dropdown-menu").on("click", "li", writeDOM);   
+
+
+    function categorySelect() {
+        categoryName = this.innerHTML;
+        for (k = 0; k < category.length; k++) {
+            if ("Fireworks" === this.innerHTML) {
+                categoryId = 0;
+            } else {
+                categoryId = 1;
+            }
+        console.log("categoryId", categoryId);            
+        }
+        writeDOM();   
+    }
 
     function writeDOM(){
         var domString = "";
-        for(var i=0; i<firework.length; i++){
-            domString += `<h1>${firework[i].type}</h1>`;
+        for(var i=0; i < types.length; i++){
+            if (categoryId === types[i].category) {
+                domString += `<h1>${categoryName}</h1>`;
+                domString += `<h3>${types[i].name}</h3>`;
+                for (l = 0; l < products.length; l++) {
+                    console.log(products[l]);
+                    // if (type[i].id == products[l].fairy_sparklers.type) {
+                    //     domString += `<h4>${products[l].name}`;
+                    // }
+                }    
+            }
         }
         $("#promises").append(domString);
     }
 
-    //ajax pryamid of doom
-    // $.ajax("./db/dinosaurs1.json").done(function(data1){
-    //     console.log("data1", data1.dinosaurs1);
-    //     dinosaurs = data1.dinosaurs1
-    //     $.ajax("./db/dinosaurs2.json").done(function(data2){
-    //         console.log("data2", data2.dinosaurs2);
-    //         data2.dinosaurs2.forEach(function(dino){
-    //             dinosaurs.push(dino);
-    //         })
-    //         $.ajax("./db/dinosaurs3.json").done(function(data3){
-    //         console.log("data3", data3.dinosaurs3);
-    //         data3.dinosaurs3.forEach(function(dino){
-    //             dinosaurs.push(dino);
-    //         })
-    //         writeDOM(); 
-    //     }).fail(function(error3){
-    //         console.log(error3);
-    //     })
-    //     }).fail(function(error2){
-    //         console.log(error2);
-    //     })
-    // }).fail(function(error1){
-    //     console.log(error1);
-    // })
+
 
 
     var categoriesJSON = function(){
@@ -68,55 +88,33 @@ $(document).ready(function(){
     };
 
 
-    // pyramid of doom with promises
-    // firstDinosaurJSON().then(function(jsonData1){
-    //     console.log(jsonData1);
-    //     dinosaurs = jsonData1;
-    //     secondDinosaurJSON().then(function(jsonData2){
-    //         console.log(jsonData2);
-    //         jsonData2.forEach(function(dino){
-    //             dinosaurs.push(dino);
-    //         })
-    //         thirdDinosaurJSON().then(function(jsonData3){
-    //         console.log(jsonData3);
-    //         jsonData3.forEach(function(dino){
-    //             dinosaurs.push(dino);
-    //         })
-    //         writeDOM();
-    //     }).catch(function(jsonDataFail3){
-    //         console.log(jsonDataFail3);
-    //     });
-    //     }).catch(function(jsonDataFail2){
-    //         console.log(jsonDataFail2);
-    //     });
-    // }).catch(function(jsonDataFail1){
-    //     console.log(jsonDataFail1);
-    // });
 
 
     // this is the most ideal method
     categoriesJSON().then(function(jsonData1){
         // console.log(jsonData1);
         category = jsonData1;
-        console.log("category", category);
+        // console.log("category", category);
         return typesJSON();
     }).then(function(jsonData2){
         // console.log(jsonData2);
-        jsonData2.forEach(function(type){
-            firework.push(type);
-        })
-        console.log("type", firework);
+        // jsonData2.forEach(function(type){
+        //     types.push(type);
+        // })
+        types = jsonData2;
+        // console.log("type", types);
         return productsJSON();
     }).then(function(jsonData3){
         // console.log("jsonData2", jsonData2);
         // console.log(jsonData3);
-        jsonData3.forEach(function(product){
-            firework.push(product);
-        })
-        console.log("product", firework);
-        writeDOM();
+        // jsonData3.forEach(function(product){
+        //     products.push(product);
+        // })
+        products = jsonData3;
+        // console.log("product",  products);
+        // writeDOM();
     });
-
+});
     //this method works the best for this solution
 //     Promise.all([firstDinosaurJSON(), secondDinosaurJSON(), thirdDinosaurJSON()])
 //         .then(function(resultz){
@@ -128,4 +126,3 @@ $(document).ready(function(){
 //             })
 //             writeDOM();
 //         })
-});
