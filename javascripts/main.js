@@ -38,16 +38,17 @@ $(document).ready(function(){
     }
 
     function writeDOM(){
+        var typePlaceHolder = 0;
         var domString = "";
         for(var i=0; i < types.length; i++){
             if (categoryId === types[i].category) {
                 domString += `<h1>${categoryName}</h1>`;
                 domString += `<h3>${types[i].name}</h3>`;
                 for (l = 0; l < products.length; l++) {
-                    console.log(products[l]);
-                    // if (type[i].id == products[l].fairy_sparklers.type) {
-                    //     domString += `<h4>${products[l].name}`;
-                    // }
+                    if (types[i].id === products[l].fairy_sparklers.type) {
+                        console.log(products[l].fairy_sparklers.type);
+                        domString += `<h4>${products[l].fairy_sparklers.name}`;
+                    }
                 }    
             }
         }
